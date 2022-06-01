@@ -501,7 +501,7 @@ function Header() {
 (App.js)
 import logo from './logo.svg';
 import './App.css';
-import { PromiseProvider, STATES } from 'mongoose'
+import { deleteModel, PromiseProvider, STATES } from 'mongoose'
 
 function Header(props) {
   console.log('props', props);
@@ -715,7 +715,7 @@ Check the render method of `Nav`. See https://reactjs.org/link/warning-keys for 
 그 key 라는 prop의 값은 그 "반복문 안에서는 고유한 값을 가져야한다"는 말 이다. 
 
 아래처럼 각각의 li에 key 라는 prop을 주고 그 안에 t.id를 넣어주면 된다.
-(t.id 실수로 다 1로 넣었는데 수정함, 위 코드랑 비교해보면 다름)
+(topics.id 실수로 다 1로 넣었는데 수정함, 위 코드랑 비교해보면 다름)
 
 ******************************************************************************************************************************
 (App.js)
@@ -768,7 +768,7 @@ export default App;
 
 _<input type="button" onclick="alert('hi')">
 
-위의 HTMl 태그를 보면 onclick 이란게 있다. 
+위의 HTML 태그를 보면 onclick 이란게 있다. 
 저것 덕분에 사용자가 버튼을 클릭했을 때 경고창을 띄울 수 있다. 
 
 현재까지 재가 만든 컴포넌트에 props, 즉, 속성은 있지만 아직 이벤트는 없다. 
@@ -864,8 +864,8 @@ export default App;
 ******************************************************************************************************************************
 
 그 다음으로는 Nav를 클릭했을 때 각각의 순서에 맞게 경고창에 1,2,3 을 띄우도록 하고 싶다. 
-아래처럼 코드를 작성하였고 현재까지 내가 느낀바 App이 내가 만든 컴포넌트들을 정의하는곳이다. 
-또한 App 에서  정의된 컴포넌트들의 세부내용들 즉, 그 컴포넌트들이 기존의 HTML 코드로는 어떤 형상인지에 대해서는 
+아래처럼 코드를 작성하였고 현재까지 내가 느낀바 App이 내가 만든 컴포넌트들을 사용하는곳이다. 
+또한 App 에서  사용된 컴포넌트들의 세부내용들 즉, 그 컴포넌트들이 기존의 HTML 코드로는 어떤 형상인지에 대해서는 
 위의 컴포넌트들의 이름을가진 함수들에서 알 수 있다. 
 
 그러니 App 에서 이벤트발생 시 실행시켜야할 함수를 넣어주면 컴포넌트의 이름을 가진 함수에서 그 함수를 받아서 
@@ -1101,7 +1101,7 @@ length: 2
 1번째 원소는 함수다. 
 
 즉, useState 는 배열을 return 하고 0번쨰 데이터는 상태의 값을 읽을 때 쓰는 data
-1번쨰 데이터는 그 상태의 값을 변경할 때 사용하는 함수 이다. 
+1번째 데이터는 그 상태의 값을 변경할 때 사용하는 함수 이다. 
 
 자 그럼 어떻게 하면 될까?
 일단 mode = _mode[0] 을 해주면 mode 값을 통해서 상태 값을 읽을 수 있게 되겠다. 
@@ -1210,7 +1210,7 @@ export default App;
 Nav 에서 html, css, js 를 선택함에따라 내용이 바뀌길 바란다. 
 그것을 작성해보자. 
 
-******************************************************************************************************************************
+**********************************************************************************************************************************************
 (App.js)
 
 import logo from './logo.svg';
@@ -1281,7 +1281,7 @@ function App() {
   );
 }
 export default App;
-******************************************************************************************************************************
+**********************************************************************************************************************************************
 
 위의 코드에서는
 1. Nav 에서는 onClick 이벤트 발생 시 onChangeMode의 인자로 클릭한 list의 id를 넣어준다. 
@@ -1357,9 +1357,6 @@ function App() {
     {id:2, title:'css', body:'css is...'},
     {id:3, title:'javascript', body:'javascript is...'}
   ];
-  // const _mode = useState("Welcome");
-  // const mode = _mode[0];
-  // const setMode = _mode[1];
   const [mode, setMode] = useState("Welcome");
   const [id, setId] = useState(null);
   let content = null;
@@ -1368,7 +1365,7 @@ function App() {
   } else if(mode === 'Read') {
     for(let i=0;i<topics.length;i++){
       console.log(i, id);
-      if(i+1 === Number(id)) {
+      if(i+1 === Number(id)) {          <- id를 숫자화 시켜주었다. 
         content = <Article title={topics[i].title} body={topics[i].body}></Article>   
       }
     }
@@ -1409,7 +1406,7 @@ a 태그를 사용하여 Create 라는 링크를 만들고 링크를 클릭했�
 3. mode 를 "Create" 로 바꿔준다. 그러면 App() 컴포넌트가 다시 실행이 된다. 
 4. mode가 바뀌면 create 할 수 있는 태그들을 만들어야하는데 너무 복잡하니까 Create 라는 컴포넌트를 따로 만들거다. 
 
-******************************************************************************************************************************
+**************************************************************************************************************************************************
 (App.js)
 
 import logo from './logo.svg';
@@ -1460,7 +1457,7 @@ function App() {
   );
 }
 export default App;
-******************************************************************************************************************************
+**************************************************************************************************************************************************
 
 어떤 정보를 서버로 전송할 때 사용하는 HTML 태그가 <form> 이다.
 이 form 태그를 사용하여 입력하는 컨트롤들을 추가할것이다. 
@@ -1488,7 +1485,7 @@ Create 컴포넌트를 이용하는 이용자가 생성버튼을 눌렀을 떄 �
 예를들어 Create 컴포넌트에 onCreate 라는 prop 을 만들고 함수를 전달하면 
 사용자가 Create(submit) 버튼을 눌렀을 때 이 함수가 실행된다라고 사용자에게 고지해야한다. 
 
-그떄의 이 콜백함수는 title, body 값을 받을 수 있어야한다.
+그때의 이 콜백함수는 title, body 값을 받을 수 있어야한다.
 
 ******************************************************************************************************************************
 function App() {
@@ -2254,4 +2251,71 @@ export default App;
 ******************************************************************************************************************************************************************
 
 # Delete 
+
+Delete 버튼은 Create, Update 링크 아래에 둘것이다.  
+Create, Update 는 특정 페이지로 이동하기 때문에 링크다. 
+그러나 Delete는 그냥 누르자마자 삭제를 시킬것이기 때문에 링크가 아니라 버튼을 사용 할 것이다. 
+
+자 그럼 Delete 버튼을 어디에 위치시키면 될까?
+contextControl 이라는 변수는 mode 가 Read 일 때에만 보이게 되어있다. 
+즉 Update 처럼 Delete 도 상세페이지로 들어갈 때 에만 보이게 하도록 할 것이다. 
+
+그러므로 contextControl 변수에 delete 버튼도 추가해주면 되는데 
+기존에 Update를 담기위한 li 태그가 하나 있었고 거기에 또 하나의 li 태그를 contextControl 변수안에 담아야하는데 
+리액트에서는 태그를 다룰 땐 하나의 태그안에 들어가 있어야한다. 
+그래서 <>"묶이는복수의 태그"</> 이렇게 빈 태그로 묶어주어 복수의 태그를 그룹핑하여 사용하여야 한다. 
+  -> <></> 는 실제 HTML 상으로는 어떠한 태그도 존재하지 않는다. 
+
+이렇게 가상의 빈태그로 묶어준 범위안에 Delete 버튼을 추가한 뒤 button은 event.preventDefault() 이런거 해줄 필요없다. 
+기본 동작 이런것이 없으니까. 
+그리고 onClick 이벤트발생시 동작하는 함수에서 newTopics라는 빈 배열을 만들고 topics 배열안에 현재 상세페이지의 id가 아닌
+객체들만 push 한 후 setTopics()를 통해 newTopics 배열을 넣어주면 된다. 
+
+
+***********************************************************************************************************************************************************
+(App.js)
+
+function App() {
+  const [topics, setTopics] = useState([
+    {id:1, title:'html', body:'html is...'},
+    {id:2, title:'css', body:'css is...'},
+    {id:3, title:'javascript', body:'javascript is...'}
+  ]);
+  const [mode, setMode] = useState("Welcome");
+  const [id, setId] = useState(null);
+  const [nextId, setNextId] = useState(4);
+  let content = null;
+  let contextControl = null;
+  if(mode === "Welcome"){
+    content = <Article title="Welcome" body="Hello, WEB"></Article>
+  } else if(mode === 'Read') {
+      for(let i=0;i<topics.length;i++){
+        if(i+1 === Number(id)) {
+          content = <Article title={topics[i].title} body={topics[i].body}></Article>   
+        }
+      }
+      contextControl =  <>                              <- 복수의 태그를 그룹핑하기 위한 빈태그 
+        <li><a href={'/update'+id} onClick={event=>{
+          event.preventDefault();
+          setMode("Update");
+        }}>Update</a></li>
+        <li>
+          <input type="button" value="Delete" onClick={()=>{    <- Delete 버튼 만들어주고 
+            const newTopics= [];                                <- 빈배열을 만든 후 
+            for(let i=0;i<topics.length;i++){
+              if(topics[i].id !== Number(id)){                  <- 현재 페이지의 id와 다른 객체들만 담아서 배열을 만든 후 
+                newTopics.push(topics[i])
+              }
+            }
+            setTopics(newTopics);                               <- 그 새로 만든 배열을 setTopics 를 통해 topics 배열로 바꿔준다. 
+            setMode("Welcome");                                 <- 그리고 지웠으니까 홈페이지로 돌아가게 해주기.
+          }}/>
+        </li>
+      </>
+  } 
+  .
+  .
+}
+export default App;
+***********************************************************************************************************************************************************
 
